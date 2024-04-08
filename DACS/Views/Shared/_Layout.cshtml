@@ -34,7 +34,7 @@
                     </ul>
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole(UserRoleModel.Role_Admin))
                     {
-                        <a class="nav-link text-dark" asp-route="AdminPage"> Đi tới AdminPage </a>
+                        <a class="nav-link text-dark" asp-area="admin" asp-controller="manager" asp-action="index">AdminPage</a>
                     }
                     <partial name="_LoginPartial" />
                 </div>

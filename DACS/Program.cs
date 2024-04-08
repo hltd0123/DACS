@@ -1,6 +1,7 @@
 using DACS.Models.DatabaseModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,24 +45,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-#pragma warning disable ASP0014 // Suggest using top level route registrations
-app.UseEndpoints(endpoints =>
-{
-    //Mục tiêu là gán được nhiều endPoint ở đây
-    endpoints.MapControllerRoute(
-        name: "AdminPage",
-        pattern: "{area=Admin}/{controller=Manager}/{action=Index}/{id?}"
-
-    );
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
-});
-#pragma warning restore ASP0014 // Suggest using top level route registrations
 
 app.MapRazorPages();
 
