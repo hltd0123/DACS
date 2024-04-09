@@ -5,7 +5,10 @@ namespace DACS.Models.DatabaseModel
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+        {
+            this.Database.SetCommandTimeout(TimeSpan.FromSeconds(1000));
+        }
         //Phone Data
         public DbSet<Phone> Phones { get; set; }
         public DbSet<PhoneImage> PhoneImages { get; set; }

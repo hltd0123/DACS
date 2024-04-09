@@ -1,5 +1,8 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     string coreui = "@coreui";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var ActionName = this.ViewContext.RouteData.Values["action"].ToString();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -57,13 +60,39 @@
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" asp-controller="Phones">
                     <svg class="nav-icon">
                         <use xlink:href="./vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-                    </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span>
+                    </svg> Điện thoại
                 </a>
-                <!--Khu để các chức năng của admin như thê xoá sửa-->
-
+            </li>
+            
+                @*
+                Khu để các chức năng của admin như thê xoá sửa
+                    nav-title : Tiêu đề 
+                    nav-group
+                    nav-link nav-group-toggle
+                    ví dụ cho 1 nhảy ra nhiều
+            <li class="nav-title">Components</li>
+            <li class="nav-group">
+            <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-puzzle"></use>
+            </svg> Base
+            </a>
+            <ul class="nav-group-items compact">
+            <li class="nav-item"><a class="nav-link" href="base/tooltips.html"><span class="nav-icon"><span class="nav-icon-bullet"></span></span> Tooltips</a></li>
+            </ul>
+            </li>
+                    ví dụ cho 1 cái bấm luôn
+            <li class="nav-item">
+            <a class="nav-link" href="index.html">
+            <svg class="nav-icon">
+            <use xlink:href="./vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
+            </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span>
+            </a>
+            </li>
+            *@
         </ul>
         <div class="sidebar-footer border-top d-none d-md-flex">
             <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
@@ -198,16 +227,19 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb my-0">
                         <li class="breadcrumb-item">
-                            <a href="#">Home</a>
+                            <a asp-controller="Manager">Home</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <span>Dashboard</span>
+                            <a asp-controller="@controllerName">@controllerName</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a asp-controller="@controllerName" asp-action="@ActionName">@ActionName</a>
                         </li>
                     </ol>
                 </nav>
             </div>
         </header>
-        <div class="body flex-grow-1">
+        <div class="body flex-grow-1" style="padding: 2%">
             @RenderBody();
         </div>
         <footer class="footer px-4">
